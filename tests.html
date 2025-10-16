@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Life Planner - Tests</title>
+  <style>
+    body {
+      font-family: 'Manrope', sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1, h2 {
+      margin-top: 1.5em;
+    }
+    .test-section {
+      margin-bottom: 2em;
+      border: 1px solid #ddd;
+      padding: 1em;
+      border-radius: 5px;
+    }
+    .test-case {
+      margin-bottom: 0.5em;
+      padding: 0.5em;
+      border-bottom: 1px solid #eee;
+    }
+    .pass {
+      color: green;
+      font-weight: bold;
+    }
+    .fail {
+      color: red;
+      font-weight: bold;
+    }
+    .test-input {
+      font-family: monospace;
+      padding: 0.2em;
+      background-color: #f5f5f5;
+    }
+    .test-summary {
+      margin-top: 1em;
+      font-weight: bold;
+    }
+    .regex-pattern {
+      font-family: monospace;
+      background-color: #f5f5f5;
+      padding: 0.5em;
+      margin: 0.5em 0;
+      display: block;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Campus Life Planner - Regex Tests</h1>
+  
+  <div class="test-section">
+    <h2>Title Validation</h2>
+    <p>Pattern: <code class="regex-pattern">/^\S(?:.*\S)?$/</code></p>
+    <p>Description: No leading/trailing spaces</p>
+    
+    <div id="titleTests" class="test-cases"></div>
+    <div id="titleSummary" class="test-summary"></div>
+  </div>
+  
+  <div class="test-section">
+    <h2>Duration Validation</h2>
+    <p>Pattern: <code class="regex-pattern">/^(0|[1-9]\d*)(\.[0-9]{1,2})?$/</code></p>
+    <p>Description: Numbers with optional decimal (up to 2 places)</p>
+    
+    <div id="durationTests" class="test-cases"></div>
+    <div id="durationSummary" class="test-summary"></div>
+  </div>
+  
+  <div class="test-section">
+    <h2>Date Validation</h2>
+    <p>Pattern: <code class="regex-pattern">/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/</code></p>
+    <p>Description: YYYY-MM-DD format</p>
+    
+    <div id="dateTests" class="test-cases"></div>
+    <div id="dateSummary" class="test-summary"></div>
+  </div>
+  
+  <div class="test-section">
+    <h2>Tag Validation</h2>
+    <p>Pattern: <code class="regex-pattern">/^[A-Za-z]+(?:[ -][A-Za-z]+)*$/</code></p>
+    <p>Description: Letters, spaces, hyphens</p>
+    
+    <div id="tagTests" class="test-cases"></div>
+    <div id="tagSummary" class="test-summary"></div>
+  </div>
+  
+  <div class="test-section">
+    <h2>Advanced Regex: Duplicate Words</h2>
+    <p>Pattern: <code class="regex-pattern">/\b(\w+)\s+\1\b/</code></p>
+    <p>Description: Finds duplicate words</p>
+    
+    <div id="duplicateTests" class="test-cases"></div>
+    <div id="duplicateSummary" class="test-summary"></div>
+  </div>
+
+  <script>
+    // Test runner function
+    function runTests(testCases, regex, elementId, summaryId) {
+      const testElement = document.getElementById(elementId);
+      let passed = 0;
+      
+      testCases.forEach(test => {
+        const result = regex.test(test.input);
+        const success = result === test.expected;
+        
+        if (success) passed++;
+        
+        const testCase = document.createElement('div');
+        testCase.className = 'test-case';
+        testCase.innerHTML = `
+          <span class="test-input">${test.input}</span>: 
+          <span class="${success ? 'pass' : 'fail'}">
+            ${success ? 'PASS' : 'FAIL'} 
+            (Expected: ${test.expected}, Got: ${result})
+          </span>
+          ${test.description ? `<br><small>${test.description}</small>` : ''}
+        `;
+        
+        testElement.appendChild(testCase);
+      });
+      
+      const summary = document.getElementById(summaryId);
+      summary.textContent = `${passed}/${testCases.length} tests passed`;
+      summary.className = passed === testCases.length ? 'test-summary pass' : 'test-summary fail';
+    }
+    
+    // Define regex patterns
+    const titleRegex = /^\S(?:.*\S)?$/;
+    const durationRegex = /^(0|[1-9]\d*)(\.[0-9]{1,2})?$/;
+    const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+    const tagRegex = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
+    const duplicateWordRegex = /\b(\w+)\s+\1\b/;
+    
+    // Title test cases
+    const titleTests = [
+      { input: "Valid Title", expected: true, description: "Standard title" },
+      { input: "SingleWord", expected: true, description: "Single word" },
+      { input: "Title with multiple words", expected: true, description: "Multiple words" },
+      { input: " LeadingSpace", expected: false, description: "Has leading space" },
+      { input: "TrailingSpace ", expected: false, description: "Has trailing space" },
+      { input: " Both Spaces ", expected: false, description: "Has both leading and trailing spaces" },
+      { input: "  ", expected: false, description: "Only spaces" },
+      { input: "", expected: false, description: "Empty string" }
+    ];
+    
+    // Duration test cases
+    const durationTests = [
+      { input: "60", expected: true, description: "Whole number" },
+      { input: "45.5", expected: true, description: "Decimal with one place" },
+      { input: "30.25", expected: true, description: "Decimal with two places" },
+      { input: "0", expected: true, description: "Zero" },
+      { input: "01", expected: false, description: "Leading zero" },
+      { input: "60.", expected: false, description: "Decimal point with no digits after" },
+      { input: "60.123", expected: false, description: "More than two decimal places" },
+      { input: "-30", expected: false, description: "Negative number" },
+      { input: "abc", expected: false, description: "Non-numeric" },
+      { input: "30min", expected: false, description: "Number with text" }
+    ];
+    
+    // Date test cases
+    const dateTests = [
+      { input: "2023-12-15", expected: true, description: "Valid date" },
+      { input: "2023-01-01", expected: true, description: "January 1st" },
+      { input: "2023-12-31", expected: true, description: "December 31st" },
+      { input: "2023-13-01", expected: false, description: "Invalid month (13)" },
+      { input: "2023-00-01", expected: false, description: "Invalid month (00)" },
+      { input: "2023-01-32", expected: false, description: "Invalid day (32)" },
+      { input: "2023-01-00", expected: false, description: "Invalid day (00)" },
+      { input: "23-01-01", expected: false, description: "Year too short" },
+      { input: "01/01/2023", expected: false, description: "Wrong format (slashes)" },
+      { input: "2023.01.01", expected: false, description: "Wrong format (dots)" }
+    ];
+    
+    // Tag test cases
+    const tagTests = [
+      { input: "Academic", expected: true, description: "Single word" },
+      { input: "Study Group", expected: true, description: "Two words with space" },
+      { input: "Work-Study", expected: true, description: "Hyphenated words" },
+      { input: "Multiple Word Tag", expected: true, description: "Multiple words" },
+      { input: "123", expected: false, description: "Numbers only" },
+      { input: "Tag123", expected: false, description: "Letters with numbers" },
+      { input: "Tag_Name", expected: false, description: "Contains underscore" },
+      { input: "Tag!", expected: false, description: "Contains special character" },
+      { input: "Tag ", expected: false, description: "Trailing space" },
+      { input: " Tag", expected: false, description: "Leading space" },
+      { input: "Tag-", expected: false, description: "Ending with hyphen" },
+      { input: "-Tag", expected: false, description: "Starting with hyphen" },
+      { input: "Tag  Name", expected: false, description: "Double space" }
+    ];
+    
+    // Duplicate word test cases
+    const duplicateTests = [
+      { input: "The the book", expected: true, description: "Duplicate 'the'" },
+      { input: "This is is wrong", expected: true, description: "Duplicate 'is'" },
+      { input: "No duplicates here", expected: false, description: "No duplicates" },
+      { input: "Repeat repeat but not adjacent", expected: false, description: "Same word but not adjacent" },
+      { input: "THE the case sensitive", expected: false, description: "Case sensitive comparison" },
+      { input: "Word word.", expected: false, description: "Punctuation breaks pattern" },
+      { input: "Very very-similar", expected: false, description: "Hyphen breaks pattern" }
+    ];
+    
+    // Run all tests
+    document.addEventListener('DOMContentLoaded', () => {
+      runTests(titleTests, titleRegex, 'titleTests', 'titleSummary');
+      runTests(durationTests, durationRegex, 'durationTests', 'durationSummary');
+      runTests(dateTests, dateRegex, 'dateTests', 'dateSummary');
+      runTests(tagTests, tagRegex, 'tagTests', 'tagSummary');
+      runTests(duplicateTests, duplicateWordRegex, 'duplicateTests', 'duplicateSummary');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "task_1631234567890",
+    "title": "Study for Calculus Exam",
+    "duration": 120,
+    "dueDate": "2023-12-15",
+    "tag": "Academic",
+    "createdAt": "2023-12-01T10:30:00.000Z",
+    "updatedAt": "2023-12-01T10:30:00.000Z"
+  },
+  {
+    "id": "task_1631234567891",
+    "title": "Group Project Meeting",
+    "duration": 60,
+    "dueDate": "2023-12-10",
+    "tag": "Meeting",
+    "createdAt": "2023-12-01T11:15:00.000Z",
+    "updatedAt": "2023-12-01T11:15:00.000Z"
+  },
+  {
+    "id": "task_1631234567892",
+    "title": "Gym Workout",
+    "duration": 45.5,
+    "dueDate": "2023-12-08",
+    "tag": "Health",
+    "createdAt": "2023-12-01T12:00:00.000Z",
+    "updatedAt": "2023-12-01T12:00:00.000Z"
+  },
+  {
+    "id": "task_1631234567893",
+    "title": "Library Research",
+    "duration": 90,
+    "dueDate": "2023-12-12",
+    "tag": "Academic",
+    "createdAt": "2023-12-02T09:45:00.000Z",
+    "updatedAt": "2023-12-02T09:45:00.000Z"
+  },
+  {
+    "id": "task_1631234567894",
+    "title": "Coffee with Professor",
+    "duration": 30,
+    "dueDate": "2023-12-09",
+    "tag": "Meeting",
+    "createdAt": "2023-12-02T14:20:00.000Z",
+    "updatedAt": "2023-12-02T14:20:00.000Z"
+  },
+  {
+    "id": "task_1631234567895",
+    "title": "Campus Club Event",
+    "duration": 120,
+    "dueDate": "2023-12-16",
+    "tag": "Social",
+    "createdAt": "2023-12-03T08:30:00.000Z",
+    "updatedAt": "2023-12-03T08:30:00.000Z"
+  },
+  {
+    "id": "task_1631234567896",
+    "title": "Essay Draft Review",
+    "duration": 75,
+    "dueDate": "2023-12-11",
+    "tag": "Academic",
+    "createdAt": "2023-12-03T16:45:00.000Z",
+    "updatedAt": "2023-12-03T16:45:00.000Z"
+  },
+  {
+    "id": "task_1631234567897",
+    "title": "Volunteer at Food Bank",
+    "duration": 180,
+    "dueDate": "2023-12-17",
+    "tag": "Community",
+    "createdAt": "2023-12-04T11:00:00.000Z",
+    "updatedAt": "2023-12-04T11:00:00.000Z"
+  },
+  {
+    "id": "task_1631234567898",
+    "title": "Prepare Presentation Slides",
+    "duration": 60,
+    "dueDate": "2023-12-13",
+    "tag": "Academic",
+    "createdAt": "2023-12-05T10:15:00.000Z",
+    "updatedAt": "2023-12-05T10:15:00.000Z"
+  },
+  {
+    "id": "task_1631234567899",
+    "title": "Dorm Room Cleaning",
+    "duration": 45,
+    "dueDate": "2023-12-09",
+    "tag": "Chores",
+    "createdAt": "2023-12-05T17:30:00.000Z",
+    "updatedAt": "2023-12-05T17:30:00.000Z"
+  },
+  {
+    "id": "task_1631234567900",
+    "title": "Call Parents",
+    "duration": 15.5,
+    "dueDate": "2023-12-08",
+    "tag": "Personal",
+    "createdAt": "2023-12-06T19:00:00.000Z",
+    "updatedAt": "2023-12-06T19:00:00.000Z"
+  },
+  {
+    "id": "task_1631234567901",
+    "title": "Job Application Deadline",
+    "duration": 120,
+    "dueDate": "2023-12-20",
+    "tag": "Career",
+    "createdAt": "2023-12-07T08:45:00.000Z",
+    "updatedAt": "2023-12-07T08:45:00.000Z"
+  }
+]

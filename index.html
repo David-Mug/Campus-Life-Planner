@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Life Planner</title>
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header role="banner">
+    <h1>Campus Life Planner</h1>
+    <p>Plan your campus days with ease</p>
+    <button id="themeToggle" class="toggle-btn">Dark Mode</button>
+    <nav>
+      <ul>
+        <li><a href="#dashboard-section" aria-current="page">Dashboard</a></li>
+        <li><a href="#add-task-section">Add Task</a></li>
+        <li><a href="mytasks.html">Tasks</a></li>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content" role="main" tabindex="-1">
+    <section id="dashboard-section" aria-labelledby="dashboard-heading">
+      <h2 id="dashboard-heading">Dashboard</h2>
+      <div class="stats-container">
+        <div class="stat-card">
+          <h3>Total Tasks</h3>
+          <p id="totalTasks">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Total Duration</h3>
+          <p id="totalDuration">0 minutes</p>
+        </div>
+        <div class="stat-card">
+          <h3>Top Tag</h3>
+          <p id="topTag">None</p>
+        </div>
+        <div class="stat-card">
+          <h3>Average Duration</h3>
+          <p id="avgDuration">0 minutes</p>
+        </div>
+      </div>
+      <div class="trend-container">
+        <h3>Last 7 Days Trend</h3>
+        <div id="weekTrend" class="trend-chart"></div>
+      </div>
+      <div class="target-container">
+        <h3>Daily Target</h3>
+        <div class="target-meter">
+          <div id="targetProgress" class="target-progress"></div>
+        </div>
+        <p id="targetStatus" role="status" aria-live="polite">No target set</p>
+      </div>
+    </section>
+
+    <section id="add-task-section" aria-labelledby="add-task-heading">
+      <h2 id="add-task-heading">Add New Task</h2>
+      <form id="taskForm" novalidate>
+        <label for="taskTitle">Title:</label>
+        <input
+          type="text"
+          id="taskTitle"
+          name="taskTitle"
+          placeholder="Study Session"
+          required
+          aria-describedby="taskTitleHelp taskTitleError"
+        />
+        <small id="taskTitleHelp" class="help-text">No leading/trailing spaces</small>
+        <span id="taskTitleError" class="error-message" role="alert" aria-live="assertive"></span>
+
+        <label for="taskDuration">Duration (minutes):</label>
+        <input
+          type="text"
+          id="taskDuration"
+          name="taskDuration"
+          placeholder="60"
+          required
+          aria-describedby="taskDurationHelp taskDurationError"
+        />
+        <small id="taskDurationHelp" class="help-text">Numbers only (e.g., 60)</small>
+        <span id="taskDurationError" class="error-message" role="alert" aria-live="assertive"></span>
+
+        <label for="taskDueDate">Due Date:</label>
+        <input
+          type="date"
+          id="taskDueDate"
+          name="taskDueDate"
+          required
+          aria-describedby="taskDueDateError"
+        />
+        <span id="taskDueDateError" class="error-message" role="alert" aria-live="assertive"></span>
+
+        <label for="taskTag">Tag:</label>
+        <input
+          type="text"
+          id="taskTag"
+          name="taskTag"
+          placeholder="Study"
+          required
+          aria-describedby="taskTagHelp taskTagError"
+        />
+        <small id="taskTagHelp" class="help-text">Letters, spaces, hyphens only</small>
+        <span id="taskTagError" class="error-message" role="alert" aria-live="assertive"></span>
+
+        <!-- A general message area for other feedback -->
+        <p id="message" class="message" role="status" aria-live="polite"></p>
+
+        <div class="form-buttons">
+          <button type="submit" id="addTaskBtn">Add Task</button>
+          <button type="button" id="updateTaskBtn" disabled>Update Task</button>
+          <button type="reset" id="cancelBtn">Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="search-section" aria-labelledby="search-heading">
+      <h2 id="search-heading">Search Tasks</h2>
+      <div class="search-controls">
+        <div class="search-input-group">
+          <label for="searchInput">Search pattern:</label>
+          <input
+            type="text"
+            id="searchInput"
+            name="searchInput"
+            placeholder="Enter regex pattern..."
+            aria-describedby="searchResultsCount"
+          />
+        </div>
+        <div class="search-options">
+          <label class="checkbox-label">
+            <input type="checkbox" id="caseInsensitive" checked>
+            Case insensitive
+          </label>
+        </div>
+      </div>
+      <p id="searchResultsCount" class="message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="taskListSection" aria-labelledby="task-list-heading">
+      <h2 id="task-list-heading">My Tasks</h2>
+      <div class="sort-controls">
+        <label for="sortBy">Sort by:</label>
+        <select id="sortBy">
+          <option value="dueDate">Due Date</option>
+          <option value="title">Title (A-Z)</option>
+          <option value="duration">Duration</option>
+        </select>
+        <button id="sortDirection" aria-label="Toggle sort direction">↓</button>
+      </div>
+      <ul id="taskList" aria-live="polite" aria-atomic="true">
+        <!-- list items inserted by JS -->
+      </ul>
+    </section>
+
+   
+  </main>
+
+  <footer role="contentinfo">
+    <p>©2023 Campus Life Planner - All Rights Reserved</p>
+  </footer>
+
+  <script type="module" src="scripts/main.js"></script>
+</body>
+</html>
