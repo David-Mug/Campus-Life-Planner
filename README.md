@@ -67,3 +67,6 @@ Tested and working in latest versions of:
 
 ## Youtube Link
 https://www.youtube.com/watch?v=oK1D7WBluO0
+
+## Deployment Link Github Page
+https://david-mug.github.io/Campus-Life-Planner/
